@@ -1,8 +1,3 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - main
 
@@ -10,25 +5,24 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
+- script: dotnet workload restore
+  displayName: 'Restore .NET workloads (wasm-tools)'
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: 'Publish Browser project'
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/ComicOpenSilver.Browser.csproj'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
 
-- task: VSBuild@1
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifact for release pipeline'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
