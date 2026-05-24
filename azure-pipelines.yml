@@ -11,16 +11,16 @@ steps:
 - script: dotnet workload restore
   displayName: 'Restore .NET workloads (wasm-tools)'
 
-- script: dotnet publish ComicOpenSilver.Browser/ComicOpenSilver.Browser.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish
+- script: dotnet publish ComicOpenSilver.Browser/ComicOpenSilver.Browser.csproj --configuration $(buildConfiguration) --output $(Build.SourcesDirectory)/publish_output
   displayName: 'Publish Browser project'
 
-- script: find $(Build.ArtifactStagingDirectory)/publish -maxdepth 2 -type f | head -30
+- script: find $(Build.SourcesDirectory)/publish_output -maxdepth 2 -type f | head -30
   displayName: 'Debug: show publish output structure'
 
 - task: AzureStaticWebApp@0
   displayName: 'Deploy to Azure Static Web Apps'
   inputs:
-    app_location: '$(Build.ArtifactStagingDirectory)/publish'
+    app_location: 'publish_output'
     output_location: ''
     azure_static_web_apps_api_token: $(deployment_token)
     skip_app_build: true
