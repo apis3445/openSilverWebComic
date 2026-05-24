@@ -11,18 +11,13 @@ steps:
 - script: dotnet workload restore
   displayName: 'Restore .NET workloads (wasm-tools)'
 
-- task: DotNetCoreCLI@2
+- script: dotnet publish ComicOpenSilver.Browser/ComicOpenSilver.Browser.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish
   displayName: 'Publish Browser project'
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/ComicOpenSilver.Browser.csproj'
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: true
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish artifact for release pipeline'
+- task: AzureStaticWebApp@0
+  displayName: 'Deploy to Azure Static Web Apps'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    app_location: '$(Build.ArtifactStagingDirectory)/publish/wwwroot'
+    output_location: ''
+    azure_static_web_apps_api_token: $(deployment_token)
+    skip_app_build: true
