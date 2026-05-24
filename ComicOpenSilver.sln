@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34310.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicOpenSilver.Browser", "ComicOpenSilver.Browser\ComicOpenSilver.Browser.csproj", "{B8AD760D-0C62-455D-908D-20D4D5C54EF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicOpenSilver", "ComicOpenSilver\ComicOpenSilver.csproj", "{9913AF10-F7EC-4630-89CF-79460527B673}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8AD760D-0C62-455D-908D-20D4D5C54EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8AD760D-0C62-455D-908D-20D4D5C54EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8AD760D-0C62-455D-908D-20D4D5C54EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8AD760D-0C62-455D-908D-20D4D5C54EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9913AF10-F7EC-4630-89CF-79460527B673}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9913AF10-F7EC-4630-89CF-79460527B673}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9913AF10-F7EC-4630-89CF-79460527B673}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9913AF10-F7EC-4630-89CF-79460527B673}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC0280CF-A46E-4EBB-9AF0-159FD078846B}
+	EndGlobalSection
+EndGlobal
